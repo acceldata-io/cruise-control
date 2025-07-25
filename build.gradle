@@ -60,6 +60,12 @@ allprojects {
   }
 
   apply plugin: 'com.github.ben-manes.versions'
+ 
+  configurations.all {
+     resolutionStrategy {
+       force 'org.slf4j:slf4j-api:1.7.36'
+     }
+   }
 
   dependencyUpdates {
     revision="release"
