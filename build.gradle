@@ -54,9 +54,6 @@ allprojects {
     maven {
         url "https://repo1.acceldata.dev/repository/odp-central/"
        }
-    maven {
-        url "https://repo1.acceldata.dev/repository/odp-staging-central/"
-       }
   }
 
   apply plugin: 'com.github.ben-manes.versions'
