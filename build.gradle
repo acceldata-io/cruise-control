@@ -52,7 +52,7 @@ allprojects {
     mavenCentral()
     mavenLocal()
     maven {
-        url "https://repo1.acceldata.dev/repository/odp-central/"
+        url "https://repo1.acceldata.dev/repository/odp-staging-central/"
        }
   }
 
