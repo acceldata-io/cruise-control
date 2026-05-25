@@ -49,11 +49,21 @@ project.ext {
 allprojects {
 
   repositories {
-    mavenCentral()
-    mavenLocal()
+    // ODP staging is listed first so that ODP-flavoured SNAPSHOT artifacts
+    // (e.g. kafka-clients:2.8.2.3.3.6.5-SNAPSHOT) are resolved entirely from
+    // here, including classifier JARs like ':test'. If a module's POM is
+    // resolved from one repository, Gradle expects all of its artifacts
+    // (classifiers included) to be in that same repository, so the staging
+    // repo must win over mavenLocal/mavenCentral for these modules.
     maven {
-        url "https://repo1.acceldata.dev/repository/odp-staging-central/"
-       }
+      url "https://repo1.acceldata.dev/repository/odp-staging-central/"
+    }
+    mavenCentral()
+    // mavenLocal() is kept last as a developer convenience. In CI/RPM builds
+    // partial installs (e.g. POM + main jar but no ':test' classifier) here
+    // can shadow the remote repos, so consider disabling it in those contexts
+    // via `-PnoMavenLocal` or by editing this block.
+    mavenLocal()
   }
 
   apply plugin: 'com.github.ben-manes.versions'
@@ -485,3 +495,4 @@ wrapper {
   gradleVersion = '7.4'
   distributionType = Wrapper.DistributionType.ALL
 }
+
