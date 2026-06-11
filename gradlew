@@ -62,10 +62,6 @@
 #
 ##############################################################################
 
-#Set JAVA_HOME to JAVA 11
-export JAVA_HOME=/usr/lib/jvm/java-11
-
-
 # Attempt to set APP_HOME
 
 # Resolve links: $0 may be a link
