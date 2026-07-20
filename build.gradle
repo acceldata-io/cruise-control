@@ -61,6 +61,7 @@ allprojects {
   configurations.all {
      resolutionStrategy {
        force 'org.slf4j:slf4j-api:1.7.36'
+       force 'org.apache.commons:commons-lang3:3.18.0'
      }
    }
 
