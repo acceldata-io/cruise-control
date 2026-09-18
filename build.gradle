@@ -157,6 +157,33 @@ subprojects {
       maxParallelForks = Runtime.runtime.availableProcessors()
     }
   }
+
+  plugins.withId('maven-publish') {
+    afterEvaluate {
+      def repoUrl = findProperty('mavenUrl')
+      if (!repoUrl) {
+        return
+      }
+      publishing {
+        repositories {
+          maven {
+            name = 'nexus'
+            url = repoUrl
+            credentials {
+              username = findProperty('mavenUsername') ?: ''
+              password = findProperty('mavenPassword') ?: ''
+            }
+          }
+        }
+      }
+      def nexusPublish = tasks.findByName('publishJavaPublicationToNexusRepository')
+      if (nexusPublish != null) {
+        tasks.named('publishToMavenLocal').configure {
+          finalizedBy(nexusPublish)
+        }
+      }
+    }
+  }
 }
 
 project(':cruise-control-core') {
