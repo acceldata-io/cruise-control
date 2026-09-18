@@ -13,6 +13,7 @@ plugins {
 }
 
 group = 'com.linkedin.cruisecontrol'
+version = cruisecontrolVersion
 
 project.ext {
   pomConfig = {
